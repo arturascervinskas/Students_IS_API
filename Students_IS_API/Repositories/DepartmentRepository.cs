@@ -21,8 +21,25 @@ namespace Students_IS_API.Repositories
         {
             try
             {
-                int rowsAffected = _connection.Execute("INSERT INTO department (name) VALUES (@Name)", department);
-                return rowsAffected == 1;
+                return _connection.Execute("INSERT INTO department (name) VALUES (@Name)", department) == 1;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("#AddShopItem ", ex);
+            }
+        }
+
+        public bool AddStudent(AddStudentRequestDto requestParams)
+        {
+            try
+            {
+                var obj = new
+                {
+                    Department_Id = requestParams.departmentId,
+                    StudentId = requestParams.studentId
+                };
+
+                return _connection.Execute("UPDATE students SET Department_id = @Department_Id WHERE id = @StudentId;", obj) == 1;
             }
             catch (Exception ex)
             {
@@ -39,6 +56,18 @@ namespace Students_IS_API.Repositories
             catch (Exception ex)
             {
                 throw new ApplicationException("#GetDepartment ", ex);
+            }
+        }
+
+        public IEnumerable<Student> GetDepartmentByID(int id)
+        {
+            try
+            {
+                return _connection.Query<Student>("SELECT * FROM depratment WHERE department.id = @id", new { id });
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("#GetDepartmentByID", ex);
             }
         }
     }

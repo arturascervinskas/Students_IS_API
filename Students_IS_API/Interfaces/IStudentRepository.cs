@@ -8,6 +8,8 @@ namespace Students_IS_API.Interfaces
         public IEnumerable<Student> GetStudentByID(int id);
         public bool AddStudents(StudentDto student);
         public IEnumerable<Student> GetStudents();
-        bool AddDepartment(AddDepartmentRequestDot requestParams);
+        bool AddDepartment(AddDepartmentRequestDto requestParams);
+        IEnumerable<Student> GetDepartmentStudents(int v, int id);
+        IEnumerable<Student> GetDepartmentStudents(int id);
     }
 }

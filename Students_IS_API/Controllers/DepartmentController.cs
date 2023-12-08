@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Students_IS_API.Dtos;
 using Students_IS_API.Interfaces;
 using Students_IS_API.Models;
+using Students_IS_API.Services;
 
 namespace Students_IS_API.Controllers
 {
@@ -16,15 +17,11 @@ namespace Students_IS_API.Controllers
 
         public DepartmentController(IDepartmentService department, ILogger<DepartmentController> logger)
         {
-            
+
             _departmentService = department;
             _logger = logger;
-
-            _logger.LogInformation("Seri Log is Working");
-
         }
         [HttpGet]
-
         public async Task<IActionResult> GetDepartment()
         {
 
@@ -34,10 +31,23 @@ namespace Students_IS_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDepartment([FromBody] Department department)
+        public async Task<IActionResult> CreateDepartment([FromBody] Department department)
         {
 
             return Ok(_departmentService.AddDepartment(department));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCourse([FromBody] AddCourseRequestDto request)
+        {
+
+            return Ok(_departmentService.AddCourse(request));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStudent([FromBody] AddStudentRequestDto requestParams)
+        {
+            return Ok(_departmentService.AddStudent(requestParams));
         }
 
     }

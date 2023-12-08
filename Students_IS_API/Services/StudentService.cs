@@ -14,7 +14,7 @@ namespace Students_IS_API.Services
             _studentRepository = studentRepository;
         }
 
-        public bool AddDepartment(AddDepartmentRequestDot requestParams)
+        public bool AddDepartment(AddDepartmentRequestDto requestParams)
 
         {
             try
@@ -40,6 +40,11 @@ namespace Students_IS_API.Services
         public bool AddStudents(StudentDto student)
         {
             return _studentRepository.AddStudents(student);
+        }
+
+        public IEnumerable<Student> GetDepartmentStudents(int id)
+        {
+            return _studentRepository.GetDepartmentStudents(id);
         }
 
         public IEnumerable<Student> GetStudents()

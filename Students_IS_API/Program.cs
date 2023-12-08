@@ -5,6 +5,8 @@ using Students_IS_API.Interfaces;
 using Students_IS_API.Repositories;
 using Students_IS_API.Services;
 using System.Data;
+using Students_IS_API.Extensions;
+
 
 namespace Students_IS_API
 {
@@ -22,11 +24,12 @@ namespace Students_IS_API
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration.GetConnectionString("connection")));
             builder.Services.AddTransient<ICoursesService, CoursesService>();
-            builder.Services.AddTransient<IStudentService, StudentService>();
-            builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<ICoursesRepository, CoursesRepository>();
-            builder.Services.AddTransient<IStudentRepository, StudentRepository>();
+            builder.Services.AddTransient<IDepartmentService, DepartmentService>();
             builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddTransient<IStudentService, StudentService>();
+            builder.Services.AddTransient<IStudentRepository, StudentRepository>();
+
             var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
                 .Enrich.FromLogContext()

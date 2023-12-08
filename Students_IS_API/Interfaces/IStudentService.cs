@@ -6,8 +6,9 @@ namespace Students_IS_API.Interfaces
 {
     public interface IStudentService
     {
-        public bool AddDepartment(AddDepartmentRequestDot requestParams);
+        public bool AddDepartment(AddDepartmentRequestDto requestParams);
         public bool AddStudents(StudentDto student);
+        public IEnumerable<Student> GetDepartmentStudents(int id);
         public IEnumerable<Student> GetStudents();
     }
 }
